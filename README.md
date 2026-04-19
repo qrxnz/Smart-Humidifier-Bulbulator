@@ -29,9 +29,9 @@ The humidifier is switched on and off automatically via a relay or NPN transisto
 
 ## 🧰 Components
 
-- **Arduino Uno** – Microcontroller
+- **Wemos D1 Mini (ESP8266)** – Microcontroller (can also be adapted for Arduino Uno)
 - **DHT11** – Humidity and temperature sensor
-- **16x2 LCD I2C** – Humidity display
+- **16x2 or 20x4 LCD I2C** – Humidity display
 - **NPN Transistor** – Controls humidifier power
 - **Humidifier (DIY1 v2.0)** – Ultrasonic module
 - **2x Push Buttons** – For setting and confirming humidity
@@ -50,13 +50,59 @@ The humidifier is switched on and off automatically via a relay or NPN transisto
 
 ## 🖥️ Usage
 
+### ⚙️ Hardware Setup
+
 1. Connect all components according to the wiring diagram.
-2. Upload the Arduino sketch using Arduino IDE.
-3. Power the system.
-4. Use **Button UP** to set your desired humidity target.
-5. Press **Button SET** to confirm.
-6. The Bulbulator will monitor the humidity and control the humidifier accordingly.
-7. Check current and target humidity on the LCD.
+2. Power the system via USB or an external 5V source.
+3. Use **Button UP** to set your desired humidity target.
+4. Press **Button SET** to confirm.
+5. The Bulbulator will monitor the humidity and control the humidifier accordingly.
+6. Check current and target humidity on the LCD.
+
+### 🚀 Building and Uploading
+
+#### Option A: Using Arduino IDE
+
+1. Open `bulbulator/bulbulator.ino`.
+2. Install required libraries: `LiquidCrystal_I2C`, `DHT11`.
+3. Select your board (e.g., **LOLIN(WEMOS) D1 R2 & mini**).
+4. Click **Upload**.
+
+#### Option B: Using CLI (Recommended for Linux/macOS)
+
+This project uses a `flake.nix` to provide a reproducible development environment.
+
+1. **Enter the development shell:**
+
+   ```bash
+   nix develop
+   ```
+
+   _This will automatically install `arduino-cli`, `make`, and all required dependencies._
+
+2. **Compile the project:**
+
+   ```bash
+   cd bulbulator
+   make compile
+   ```
+
+3. **Upload to your board:**
+
+   ```bash
+   # Find your serial port first:
+   arduino-cli board list
+
+   # Then upload (adjusting SERIAL port if needed)
+   make upload SERIAL=/dev/ttyUSB0
+   ```
+
+   _Note: If it's your first time, you might need to install the platforms and libraries specified in `sketch.yaml` by running `arduino-cli core update-index` and then `arduino-cli compile --install --profile bulbulator`._
+
+4. **Monitor serial output:**
+   ```bash
+   make monitor
+   ```
 
 ---
 
