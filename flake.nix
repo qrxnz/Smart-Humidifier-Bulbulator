@@ -4,20 +4,22 @@
     nixpkgs.url = "github:NixOS/nixpkgs";
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    flake-utils,
-  }:
-    flake-utils.lib.eachSystem ["x86_64-linux" "aarch64-darwin" "x86_64-darwin" "aarch64-linux"] (
-      system: let
+  outputs =
+    { self
+    , nixpkgs
+    , flake-utils
+    ,
+    }:
+    flake-utils.lib.eachSystem [ "x86_64-linux" "aarch64-darwin" "x86_64-darwin" "aarch64-linux" ] (
+      system:
+      let
         name = "bulbulator";
 
-        pkgs = import nixpkgs {inherit system;};
+        pkgs = import nixpkgs { inherit system; };
 
         python = pkgs.python3;
 
-        pythonWithExtras = python.buildEnv.override {extraLibs = [];};
+        pythonWithExtras = python.buildEnv.override { extraLibs = [ ]; };
 
         # The variables starting with underscores are custom,
         # the ones starting with ARDUINO are used by arduino-cli.
@@ -72,7 +74,8 @@
             >&2 echo "    Storing arduino-cli data for this project in '$_ARDUINO_PROJECT_DIR'"
           '';
         };
-      in {
+      in
+      {
         devShells = {
           inherit devShellArduinoCLI;
         };
