@@ -1,0 +1,10 @@
+# https://arduino.github.io/arduino-cli/1.2/sketch-project-file/
+profiles:
+  bulbulator:
+    fqbn: esp8266:esp8266:d1_mini
+    platforms:
+      - platform: esp8266:esp8266 (3.1.2)
+        platform_index_url: https://arduino.esp8266.com/stable/package_esp8266com_index.json
+    libraries:
+      - LiquidCrystal_I2C (2.0.0)
+      - DHT11 (2.1.0)

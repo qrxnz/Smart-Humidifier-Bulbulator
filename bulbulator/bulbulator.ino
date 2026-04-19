@@ -1,6 +1,6 @@
 #include <Wire.h> 
+#include <DHT11.h>
 #include <LiquidCrystal_I2C.h>
-#include <dht11.h>
 
 
 #define DHT11PIN 4
@@ -11,7 +11,7 @@
 
 LiquidCrystal_I2C lcd(0x27,20,4);
 
-dht11 DHT11;
+DHT11 dht11(DHT11PIN);
 
 int TRIGERHUM = 0;
 void setup()
@@ -49,10 +49,15 @@ void loop()
 
   Serial.println();
 
- int chk = DHT11.read(DHT11PIN);
+ int humidity = dht11.readHumidity();
 
  lcd.setCursor(4, 1);
- lcd.print((int)DHT11.humidity);
+ if (humidity != DHT11::ERROR_CHECKSUM && humidity != DHT11::ERROR_TIMEOUT) {
+   lcd.print(humidity);
+ } else {
+   lcd.print("--");
+ }
+ 
  delay(300);
  lcd.setCursor(12, 1);
  lcd.print(TRIGERHUM);
@@ -90,7 +95,7 @@ void loop()
     delay(500);
   }
  }
- if(DHT11.humidity < TRIGERHUM)
+ if(humidity != DHT11::ERROR_CHECKSUM && humidity != DHT11::ERROR_TIMEOUT && humidity < TRIGERHUM)
  {
   digitalWrite(HUMVCPIN, HIGH);
  }else

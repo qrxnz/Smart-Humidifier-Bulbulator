@@ -1,0 +1,26 @@
+# Nix and Direnv
+.direnv/
+.envrc.local
+
+# Arduino CLI / IDE 2.x
+.arduino_data/
+**/build/
+**/libraries.cache
+**/includes.cache
+compile_commands.json
+
+# Compiled binaries and intermediate files
+*.bin
+*.elf
+*.hex
+*.o
+*.d
+*.a
+*.map
+
+# Editor and System files
+.DS_Store
+.vscode/
+.idea/
+*.swp
+*~
