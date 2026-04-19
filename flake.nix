@@ -62,6 +62,7 @@
             # Formatters
             treefmt
             prettier
+            nixpkgs-fmt
             clang-tools
             shfmt
           ];
