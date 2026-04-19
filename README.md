@@ -44,7 +44,7 @@ The humidifier is switched on and off automatically via a relay or NPN transisto
 
 ## 🔌 Wiring Diagram
 
-[Diagram](./.github/assets/CircuitDiagram.png)
+![Diagram](./.github/assets/CircuitDiagram.png)
 
 ---
 
