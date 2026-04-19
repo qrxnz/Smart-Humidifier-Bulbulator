@@ -59,6 +59,11 @@
             picocom
             # So that the python3 wrapper of the esp8266 downloaded code can find a working python interpreter on the path
             pythonWithExtras
+            # Formatters
+            treefmt
+            prettier
+            clang-tools
+            shfmt
           ];
           shellHook = ''
             ${arduinoShellHookPaths}

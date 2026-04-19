@@ -1,0 +1,32 @@
+# Treefmt configuration file
+
+[global]
+excludes = [
+  "flake.lock",
+  ".gitignore",
+  ".arduino_data/**",
+  ".direnv/**",
+  ".git/**",
+]
+
+[formatter.nix]
+command = "nixpkgs-fmt"
+includes = ["*.nix"]
+
+[formatter.prettier]
+command = "prettier"
+options = ["--write"]
+includes = [
+  "*.yaml",
+  "*.md",
+]
+
+[formatter.arduino]
+command = "clang-format"
+options = ["-i"]
+includes = ["*.ino"]
+
+[formatter.shell]
+command = "shfmt"
+options = ["-i", "2", "-s", "-w"]
+includes = [".envrc"]
